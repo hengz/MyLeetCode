@@ -12,7 +12,26 @@ class Solution:
 
         return res
 
+    def threeSum2(self, nums: [int]) -> [[int]]:
+        # nums做排序
+        nums.sort()
+        # 两边往中间逼近
+        res = []
+        for i in range(1, len(nums) - 1):
+            head = 0
+            tail = len(nums) - 1
+            while head != i and tail != i:
+                if nums[i] + nums[head] + nums[tail] > 0:
+                    tail -= 1
+                elif nums[i] + nums[head] + nums[tail] < 0:
+                    head += 1
+                else:
+                    res.append([nums[head], nums[i], nums[tail]])
+                    head += 1
+                    tail -= 1
+        return res
+
 
 sol = Solution()
-result = sol.threeSum([-1, 0, 1, 2, -1, -4])
+result = sol.threeSum2([-1, 0, 1, 2, -1, -4])
 print(result)
